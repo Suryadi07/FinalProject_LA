@@ -5,10 +5,10 @@ import numpy as np
 from PIL import Image
 
 members = [
-    {"name": "Adetia Yuni Pangesti", "role": "Developer"},
-    {"name": "Ariq Saepul Aziz", "role": "Data Scientist"},
-    {"name": "Puji Nur Hadiyah", "role": "Tester"},
-    {"name": "Sugiyanto", "role": "Ngopi"}
+    {"name": "Adetia Yuni Pangesti"},
+    {"name": "Ariq Saepul Aziz"},
+    {"name": "Puji Nur Hadiyah"},
+    {"name": "Sugiyanto"}
 ]
 
 # halaman tranformation
@@ -37,7 +37,7 @@ def apply_transformations(image, zoom, angle, tx, ty, skew_x, skew_y):
     return image
 
 # halaman menampilkan streamlit
-st.set_page_config(page_title="Image Processing App", layout="wide")
+st.set_page_config(page_title="Image Processing App", layout="wide", page_icon="favicon.ico")
 
 # navigation
 st.sidebar.title("Navigation")
@@ -83,8 +83,14 @@ if page == "Upload & Transform":
             st.image(transformed_image, caption="Transformed Image", use_column_width=True)
 
 elif page == "Home":
-   st.title("Selamat datang")
-   st.write("Selamat datang di aplikasi pengolahan gambar Group 6! Pilih menu di sebelah kiri untuk memulai.")
-   for member in members:
-        st.subheader(member["name"])
-        st.write(f"Role: {member['role']}")
+    col1, col2 = st.columns([2, 8])
+    with col1:
+        st.image("pres.jpg", width=200)
+    with col2:
+        st.title("Selamat datang di Website")
+        st.subheader("Transformasi Gambar Group 6")
+        st.write("Pilih menu di sebelah kiri untuk memulai!")
+    st.write("Members:")
+    for member in members:
+        st.write(member["name"])
+        
