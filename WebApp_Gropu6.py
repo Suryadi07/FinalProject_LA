@@ -5,10 +5,10 @@ import numpy as np
 from PIL import Image
 
 members = [
-    {"name": "Adetia Yuni Pangesti"},
-    {"name": "Ariq Saepul Aziz"},
-    {"name": "Puji Nur Hadiyah"},
-    {"name": "Sugiyanto"}
+    {"name": "Adetia Yuni Pangesti", "foto": "1ade.jpeg"},
+    {"name": "Ariq Saepul Aziz", "foto": "2ariq.jpeg"},
+    {"name": "Puji Nur Hadiyah", "foto": "3puji.jpeg"},
+    {"name": "Sugianto", "foto": "4sugi.jpeg"}
 ]
 
 # halaman tranformation
@@ -36,17 +36,17 @@ def apply_transformations(image, zoom, angle, tx, ty, skew_x, skew_y):
 
     return image
 
-# halaman menampilkan streamlit
-st.set_page_config(page_title="Image Processing App", layout="wide", page_icon="favicon.ico")
+# tampilan bilah web
+st.set_page_config(page_title="Image Processing App Group 6", layout="wide", page_icon="favicon.ico")
 
 # navigation
 st.sidebar.title("Navigation")
-page = st.sidebar.radio("Go to", ["Home", "Upload & Transform"])
+page = st.sidebar.radio("Go to", ["Home", "Group Members", "Upload & Transform"])
 
 if page == "Upload & Transform":
     st.title("Image Processing App Group 6")
 
-    # File uploader
+    # Upload file
     uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
     if uploaded_file:
         # Read the image
@@ -56,7 +56,7 @@ if page == "Upload & Transform":
         st.sidebar.header("Transformations")
 
         # Zoom
-        zoom = st.sidebar.slider("Zoom", 0.1, 3.0, 1.0, 0.1)
+        zoom = st.sidebar.slider("Zoom", 0.1, 3.0)
 
         # Rotation
         angle = st.sidebar.slider("Rotation Angle", -180, 180, 0)
@@ -76,21 +76,40 @@ if page == "Upload & Transform":
         col1, col2 = st.columns(2)
         with col1:
             st.subheader("Original Image")
-            st.image(image, caption="Original Image", use_column_width=True)
+            st.image(image, caption="Original Image", use_container_width=True)
 
         with col2:
             st.subheader("Transformed Image")
-            st.image(transformed_image, caption="Transformed Image", use_column_width=True)
+            st.image(transformed_image, caption="Transformed Image", use_container_width=True)
 
+#tulisan-tulisan yang ada di home
 elif page == "Home":
-    col1, col2 = st.columns([2, 8])
+    col1, col2 = st.columns([3, 7])
     with col1:
-        st.image("pres.jpg", width=200)
+        st.image("pres.jpg", width=220)
     with col2:
-        st.title("Selamat datang di Website")
-        st.subheader("Transformasi Gambar Group 6")
-        st.write("Pilih menu di sebelah kiri untuk memulai!")
-    st.write("Members:")
-    for member in members:
-        st.write(member["name"])
-        
+        st.title("Welcome to the Website")
+        st.title("Image Processing")
+        st.markdown(
+                f"""
+                <p style='text-align: left; font-size: 18px; color: white; font-family: Roboto, cursive, sans-serif;'
+                >{"This Streamlit application displays the results of the Image Processing project Majoring in Industrial Engineering Group 6. Explore the page to learn more about us, see the navigation panel !"}
+                </p>
+                """,
+                unsafe_allow_html=True
+            )
+#menampilkan member di halaman ke 2
+elif page == "Group Members":
+    st.title("Group 6")
+    st.subheader("Industrrial Engineering")
+    st.subheader("Members:")
+    member_cols = st.columns(len(members))
+    for i, member in enumerate(members):
+        with member_cols[i]:
+            st.image(member["foto"], width=180)
+            st.markdown(
+                f"""
+                <p style='text-align: left; font-size: 25px; color: white; font-family: Roboto, cursive, sans-serif;'>{member['name']}</p>
+                """,
+                unsafe_allow_html=True
+            )       
