@@ -90,9 +90,11 @@ elif page == "Home":
     with col2:
         st.title("Welcome to the Website")
         st.title("Image Processing")
+        background_color = "black"
+        font_color = "white" if background_color == "black" else "black"
         st.markdown(
                 f"""
-                <p style='text-align: left; font-size: 18px; color: white; font-family: Roboto, cursive, sans-serif;'
+                <p style='text-align: left; font-size: 18px; color: white; font-family: Roboto, arial;'
                 >{"This Streamlit application displays the results of the Image Processing project Majoring in Industrial Engineering Group 6. Explore the page to learn more about us, see the navigation panel !"}
                 </p>
                 """,
@@ -101,15 +103,17 @@ elif page == "Home":
 #menampilkan member di halaman ke 2
 elif page == "Group Members":
     st.title("Group 6")
-    st.subheader("Industrrial Engineering")
+    st.subheader("Industrial Engineering")
     st.subheader("Members:")
     member_cols = st.columns(len(members))
     for i, member in enumerate(members):
         with member_cols[i]:
             st.image(member["foto"], width=180)
+            background_color = "black"
+            font_color = "white" if background_color == "black" else "black"
             st.markdown(
                 f"""
-                <p style='text-align: left; font-size: 25px; color: white; font-family: Roboto, cursive, sans-serif;'>{member['name']}</p>
+                <p style='text-align: left; font-size: 25px; color: white; font-family: Roboto, arial;'>{member['name']}</p>
                 """,
                 unsafe_allow_html=True
             )       
